@@ -30,7 +30,7 @@
       PORT(inp) |= (1 << PIN(inp))        \
       
 
-#define io_get(inp) ((INPUT(inp)) & (1 << PIN(inp)))
+#define io_get(inp) (!((INPUT(inp)) & (1 << PIN(inp))))
 #define io_high(out) ((PORT(out)) |= (1 << PIN(out)))
 #define io_low(out) ((PORT(out)) &= ~(1 << PIN(out)))
 #endif /* IO_H */
