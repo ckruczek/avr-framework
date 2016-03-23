@@ -7,6 +7,11 @@ static uint8_t data_count = 0;
 static char uart_data[UART_MAX_BUFFER_SIZE];
 static uart_callback callback;
 
+/**
+ * This function initialize the uart device with the given baudrate and a callback for 'world' interaction.
+ * @param baudrate - The baudrate used for transmission
+ * @param world_callback - A callback that is triggered everytime a transmission succeded
+ */
 void uart_init(uint32_t baudrate, uart_callback world_callback) {
 
     uint16_t UBRR_val = (F_CPU / 16) / (baudrate - 1);
@@ -35,7 +40,12 @@ ISR(USART0_RX_vect) {
         callback(uart_data);
     }
 }
-
+/**
+ * This functions sends one character to the uart 
+ * @param c - The character to send
+ * @param stream - A stream used for stdout redirection
+ * @return 
+ */
 int uart_putc(char c, FILE *stream) {
 
     while (!(UCSR0A & (1 << UDRE0))); // wait until sending is possible
@@ -43,6 +53,10 @@ int uart_putc(char c, FILE *stream) {
     return 0;
 }
 
+/**
+ * This function sends a complete string to the uart.
+ * @param s - The string to send.
+ */
 void uart_puts(char *s) {
     while (*s) {
         uart_putc(*s, stdout);
@@ -51,6 +65,11 @@ void uart_puts(char *s) {
     uart_putc('\n', stdout);
 }
 
+/**
+ * This function is used to recieve from the uart and returns the recieved byte.
+ * @param stream - A stream used for stdin redirection.
+ * @return - The recieved byte.
+ */
 int uart_recieve(FILE *stream) {
     while (!(UCSR0A & (1 << RXC0)));
     return UDR0;
