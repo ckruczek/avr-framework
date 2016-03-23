@@ -11,7 +11,7 @@ FORMAT = ihex
 
 
 # Target file name (without extension).
-TARGET = avrutil
+TARGET = blinky
 
 
 # Object files directory
@@ -21,7 +21,7 @@ OBJDIR = .
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = src/i2c.c src/uart.c
+SRC = ../../src/i2c.c ../../src/uart.c main.c
 
 # List C++ source files here. (C dependencies are automatically generated.)
 CPPSRC =
@@ -81,7 +81,7 @@ CPPDEFS = -DF_CPU=$(F_CPU)UL
 #  -Wa,...:      tell GCC to pass this to the assembler.
 #    -adhlns...: create assembler listing
 CFLAGS = -g$(DEBUG)
-CFLAGS += -Iinclude/
+CFLAGS += -I../../include/
 CFLAGS += $(CDEFS)
 CFLAGS += -O$(OPT)
 CFLAGS += -funsigned-char
@@ -327,10 +327,8 @@ ALL_ASFLAGS = -mmcu=$(MCU) -I. -x assembler-with-cpp $(ASFLAGS)
 
 
 
-
-
 # Default target.
-all: begin gccversion sizebefore build sizeafter end
+all: begin gccversion sizebefore build sizeafter end 
 
 # Change the build target to build a HEX file or a library.
 build: elf hex bin eep lss sym
@@ -345,6 +343,8 @@ lss: $(TARGET).lss
 sym: $(TARGET).sym
 LIBNAME=lib$(TARGET).a
 lib: $(LIBNAME)
+
+
 
 
 
@@ -482,7 +482,7 @@ extcoff: $(TARGET).elf
 .SECONDARY : $(TARGET).elf
 .PRECIOUS : $(OBJ)
 %.elf: $(OBJ)
-	@echo
+	@echo 
 	@echo $(MSG_LINKING) $@
 	$(CC) $(ALL_CFLAGS) $^ --output $@ $(LDFLAGS)
 
@@ -556,5 +556,5 @@ $(shell mkdir $(OBJDIR) 2>/dev/null)
 # Listing of phony targets.
 .PHONY : all begin finish end sizebefore sizeafter gccversion \
 build elf hex bin eep lss sym coff extcoff \
-clean clean_list program debug gdb-config
+clean clean_list program debug gdb-config blinky
 
