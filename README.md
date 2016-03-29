@@ -1,6 +1,4 @@
-avr-framework = Is a collection of avr specific functionality like i2c, uart and other interesting driver and helpers
-
-[![GitHub release](https://img.shields.io/github/release/ckruczek/avr-framework.svg?style=flat-square)]()
+avr-framework = Is a collection of avr specific functionality like i2c, uart and other interesting driver and helpers[![GitHub release](https://img.shields.io/github/release/ckruczek/avr-framework.svg?style=flat-square)]()
 =======
 
 **Table of contents**
