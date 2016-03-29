@@ -1,3 +1,5 @@
 noinst_LIBRARIES = libckravr.a
-AM_CFLAGS = -I$(top_srcdir)/include/ckravr
+if M2560
+    AM_CFLAGS =  -I$(top_srcdir)/include/ckravr -mmcu=atmega2560 -DF_CPU=16000000
+endif
 libckravr_a_SOURCES = i2c.c uart.c
