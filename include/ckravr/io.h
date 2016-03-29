@@ -8,8 +8,6 @@
 #ifndef IO_H
 #define IO_H
 
-#include <avr/io.h>
-
 #define _PORT_(ddr,port,pin,inp) port
 #define PORT(p) _PORT_ p
 

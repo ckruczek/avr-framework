@@ -21,7 +21,7 @@ OBJDIR = .
 
 
 # List C source files here. (C dependencies are automatically generated.)
-SRC = ../../src/i2c.c ../../src/uart.c main.c
+SRC = main.c
 
 # List C++ source files here. (C dependencies are automatically generated.)
 CPPSRC =
@@ -165,11 +165,12 @@ SCANF_LIB = $(SCANF_LIB_MIN)
 
 
 MATH_LIB = -lm
+
+
 # List any extra directories to look for libraries here.
 #     Each directory must be seperated by a space.
 #     Use forward slashes for directory separators.
 #     For a directory that has spaces, enclose it in quotes.
-EXTRALIBDIRS =
 
 
 
@@ -194,7 +195,8 @@ EXTMEMOPTS =
 LDFLAGS = -Wl,-Map=$(TARGET).map,--cref
 LDFLAGS += $(EXTMEMOPTS)
 LDFLAGS += $(patsubst %,-L%,$(EXTRALIBDIRS))
-LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB) 
+LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
+LDFLAGS += -L../../src/ -lckravr
 LDFLAGS += -Wl,-gc-sections
 #LDFLAGS += -T linker_script.x
 

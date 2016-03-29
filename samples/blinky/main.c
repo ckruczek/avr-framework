@@ -1,5 +1,8 @@
-#include "../../include/io.h"
+#include <avr/io.h>
 #include <util/delay.h>
+
+#include "ckravr/io.h"
+#include "ckravr/i2c.h"
 
 // Example how to 'declare' a output that can be used by the new io_ functions
 // This is the built-in led on an atmega2560 board
@@ -8,6 +11,8 @@
 int main(){
     
     io_out(LED);
+    
+    i2c_init();
     
     while(1){
         
