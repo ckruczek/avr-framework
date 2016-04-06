@@ -1,6 +1,6 @@
 # MCU name
-MCU = atmega2560
-
+MCU = atmega32u4
+#MCU = atmega2560
 
 # Processor frequency.
 F_CPU = 16000000
@@ -210,7 +210,11 @@ LDFLAGS += -Wl,-gc-sections
 # Type: avrdude -c ?
 # to get a full listing.
 #
-AVRDUDE_PROGRAMMER = wiring
+
+# Atmega2560
+#AVRDUDE_PROGRAMMER = wiring
+
+AVRDUDE_PROGRAMMER = avr109
 
 # com1 = serial port. Use lpt1 to connect to parallel port.
 AVRDUDE_PORT = /dev/ttyACM0    # programmer connected to serial device
@@ -232,6 +236,7 @@ AVRDUDE_WRITE_FLASH = -F -D -U flash:w:$(TARGET).hex
 # reports about avrdude. See <http://savannah.nongnu.org/projects/avrdude>
 # to submit bug reports.
 #AVRDUDE_VERBOSE = -v -v
+
 
 AVRDUDE_FLAGS = -p $(MCU) -P $(AVRDUDE_PORT) -c $(AVRDUDE_PROGRAMMER)
 AVRDUDE_FLAGS += $(AVRDUDE_NO_VERIFY)
@@ -280,7 +285,7 @@ OBJDUMP = avr-objdump
 SIZE = avr-size
 AR = avr-ar rcs
 NM = avr-nm
-AVRDUDE = ~/build/avrdude-6.1/avrdude
+AVRDUDE = avrdude
 REMOVE = rm -f
 REMOVEDIR = rm -rf
 COPY = cp
@@ -384,7 +389,7 @@ gccversion :
 
 # Program the device.
 program: $(TARGET).hex $(TARGET).eep
-	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM) && stty -F $(AVRDUDE_PORT) cs8 9600
+	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM) 
 
 
 # Generate avr-gdb config/init file which does the following:

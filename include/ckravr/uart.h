@@ -12,7 +12,10 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+#include "../../config.h"
+
 #define UART_MAX_BUFFER_SIZE     100
+
 
 typedef void(*uart_callback)(char *buffer);
 
