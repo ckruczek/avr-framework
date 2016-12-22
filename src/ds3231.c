@@ -34,12 +34,25 @@ void ds3231_set_seconds(uint8_t seconds)
 
 uint8_t ds3231_get_minutes()
 {
-    
+    uint8_t min = i2c_read8(DS3231_ADDRESS,DS3231_MINUTES);
+    return bcd_to_dec(min);
 }
+void ds3231_set_minutes(uint8_t min)
+{
+    i2c_write8(DS3231_ADDRESS,DS3231_MINUTES,dec_to_bcd(min));
+}
+
 uint8_t ds3231_get_hours()
 {
-    
+    uint8_t hours = i2c_read8(DS3231_ADDRESS,DS3231_HOURS);
+    return bcd_to_dec(hours);
 }
+
+void ds3231_set_hours(uint8_t hours)
+{
+    i2c_write8(DS3231_ADDRESS,DS3231_HOURS,dec_to_bcd(hours));
+}
+
 uint8_t ds3231_get_dayofweek()
 {
     
