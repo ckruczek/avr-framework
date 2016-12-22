@@ -1,4 +1,4 @@
-#include "i2c.h"
+#include "../include/ckravr/i2c.h"
 
 /**
  * This function intialize the i2c.
@@ -63,8 +63,6 @@ uint8_t i2c_read_ack() {
     TWCR = (1 << TWINT) | (1 << TWEN) | (1 << TWEA);
     while (!(TWCR & (1 << TWINT)));
 
-    printf("ack");
-    
     return TWDR;
 }
 
@@ -75,9 +73,7 @@ uint8_t i2c_read_ack() {
 uint8_t i2c_read_nack() {
     TWCR = (1 << TWINT) | (1 << TWEN);
     while (!(TWCR & (1 << TWINT)));
-
-    printf("nack");
-    
+ 
     return TWDR;
 }
 
