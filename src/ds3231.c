@@ -14,15 +14,22 @@ uint8_t bcd_to_dec(uint8_t bcd)
 {
     return ((bcd & 0xF0) >> 4) * 10 + (bcd & 0x0F);
 }
+
+uint8_t dec_to_bcd(uint8_t dec)
+{
+    return ((dec / 10) << 4) | (dec % 10);
+}
+
 uint8_t ds3231_get_seconds()
 {
     uint8_t sec = i2c_read8(DS3231_ADDRESS,DS3231_SECONDS);
     return bcd_to_dec(sec);
 
 }
+
 void ds3231_set_seconds(uint8_t seconds)
 {
-    
+    i2c_write8(DS3231_ADDRESS,DS3231_SECONDS,dec_to_bcd(seconds));
 }
 
 uint8_t ds3231_get_minutes()

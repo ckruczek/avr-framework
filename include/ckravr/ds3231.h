@@ -32,6 +32,7 @@ struct date_time{
 void ds3231_set_date_time(struct date_time *dt);
 void ds3231_get_date_time(struct date_time *dt);
 uint8_t bcd_to_dec(uint8_t bcd);
+uint8_t dec_to_bcd(uint8_t dec);
 uint8_t ds3231_get_seconds();
 void ds3231_set_seconds(uint8_t seconds);
 uint8_t ds3231_get_minutes();
