@@ -17,6 +17,9 @@
 
 #define F_SCL 100000UL // SCL frequency
 
+#define I2C_READ    TW_READ
+#define I2C_WRITE   TW_WRITE
+
 volatile uint8_t buffer_address;
 volatile uint8_t txbuffer[0xFF];
 volatile uint8_t rxbuffer[0xFF];
