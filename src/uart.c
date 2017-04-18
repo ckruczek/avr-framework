@@ -1,40 +1,5 @@
 #include "uart.h"
 
-#if (M32U4 == 1)
-
-#define UBRRH UBRR1H
-#define UBRRL UBRR1L
-#define UCSRB UCSR1B
-#define UCSRC UCSR1C
-#define TXEN  TXEN1
-#define RXEN  RXEN1
-#define RXCIE RXCIE1
-#define USBS  USBS1
-#define UDR   UDR1
-#define UCSRA UCSR1A
-#define UDRE  UDRE1
-#define RXC   RXC1
-
-#endif
-
-#if (M2560 == 1)
-
-#define UBRRH UBRR0H
-#define UBRRL UBRR0L
-#define UCSRB UCSR0B
-#define UCSRC UCSR0C
-#define TXEN  TXEN0
-#define RXEN  RXEN0
-#define RXCIE RXCIE0
-#define USBS  USBS0
-#define UDR   UDR0
-#define UCSRA UCSR0A
-#define UDRE  UDRE0
-#define RXC   RXC0
-
-
-#endif
-
 
 FILE uart_output = FDEV_SETUP_STREAM(uart_putc, NULL, _FDEV_SETUP_WRITE);
 FILE uart_input = FDEV_SETUP_STREAM(NULL, uart_recieve, _FDEV_SETUP_READ);
@@ -57,7 +22,7 @@ void uart_init(uint32_t baudrate, uart_callback world_callback) {
 
     // enable transmitting and reading
     UCSRB |= (1 << TXEN) | (1 << RXEN) | (1 << RXCIE);
-    UCSRC |= (1 << USBS) | (3 << UCSZ11); //Modus Asynchron 8N1 (8 Datenbits, No Parity, 1 Stopbit)
+    UCSRC |= (1 << USBS) | (3 << UCSZ); //Modus Asynchron 8N1 (8 Datenbits, No Parity, 1 Stopbit)
 
     stdout = &uart_output;
     stdin = &uart_input;
