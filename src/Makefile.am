@@ -6,4 +6,8 @@ if M32U4
     AM_CFLAGS =  -I$(top_srcdir)/include/ckravr -mmcu=atmega32u4 -DF_CPU=16000000
 endif
 
+if M328P
+    AM_CFLAGS =  -I$(top_srcdir)/include/ckravr -mmcu=atmega328p -DF_CPU=16000000
+endif
+
 libckravr_a_SOURCES = i2c.c uart.c adc.c ds3231.c
